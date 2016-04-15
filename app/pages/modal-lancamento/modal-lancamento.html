@@ -1,0 +1,49 @@
+<ion-navbar *navbar>
+  <ion-buttons start>
+    <button (click)="cancel()"><ion-icon name="close"></ion-icon></button>
+  </ion-buttons>
+  <ion-title>Lançamento</ion-title>
+</ion-navbar>
+
+<ion-content padding class="modal-lancamento">
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Descrição</ion-label>
+      <ion-input type="text" [(ngModel)]="descricao"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Valor</ion-label>
+      <ion-input type="number" [(ngModel)]="valor"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Data</ion-label>
+      <ion-input type="date" [(ngModel)]="data"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Entrada/Saida</ion-label>
+      <ion-select [(ngModel)]="entradaSaida">
+        <ion-option value="entrada">Entrada</ion-option>
+        <ion-option value="saida">Saida</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Conta</ion-label>
+      <ion-select type="text" [(ngModel)]="conta">
+        <ion-option *ngFor="#item of contas" value="{{item.descricao}}">
+          {{item.descricao}}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Pago</ion-label>
+      <ion-checkbox [(ngModel)]="pago"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <button block light (click)="save()">Salvar</button>
+</ion-content>

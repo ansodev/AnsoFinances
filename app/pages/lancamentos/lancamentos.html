@@ -1,0 +1,43 @@
+<ion-navbar *navbar>
+  <ion-title>Lançamentos</ion-title>
+  <button menuToggle>
+    <ion-icon name="menu"> </ion-icon>
+  </button>
+</ion-navbar>
+
+<ion-content padding class="lancamentos">
+  <data-filter [startDate]="dataFiltro" (changeMonth)="updateMonth($event)" (clickMonth)="onClickMonth()"></data-filter>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="#item of listLancamentos">
+      <ion-item [ngClass]="{entrada: lancamentoEntrada(item), saida: !lancamentoEntrada(item)}" (click)="edit(item)">
+        <ion-row>
+          <ion-col width-67>
+            <h2>{{item.descricao}}</h2>
+            <p>
+              {{item.conta}}
+            </p>
+            <p>
+              {{getDate(item)}}
+            </p>
+          </ion-col>
+
+          <ion-col width-33>
+            <p>
+              {{item.valor | currency:"BRL":true:1.2}}
+            </p>
+            <p>
+              {{situacaoLancamento(item)}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options>
+        <button (click)="changePaymentStatus(item)"><ion-icon name="cash"></ion-icon>{{paymentButtonText(item)}}</button>
+        <button danger (click)="delete(item)"><ion-icon name="trash"></ion-icon></button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <button fab fab-bottom fab-right danger (click)="insert()"><ion-icon name="add"></ion-icon></button>
+</ion-content>
